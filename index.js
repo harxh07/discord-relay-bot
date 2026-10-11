@@ -13,7 +13,7 @@ const N8N_WEBHOOK_URL = process.env.N8N_WEBHOOK_URL;
 client.on('messageCreate', async (message) => {
   if (message.author.bot) return;
 
-  console.log(`Message aaya: ${message.content}`);
+  console.log(`Message received in channel ${message.channelId} from ${message.author.username}`);
 
   try {
     await fetch(N8N_WEBHOOK_URL, {
@@ -25,9 +25,9 @@ client.on('messageCreate', async (message) => {
         author: message.author.username
       })
     });
-    console.log('n8n ko forward kar diya ✅');
+    console.log('Forwarded to n8n ✅');
   } catch (err) {
-    console.error('Error:', err);
+    console.error('Failed to forward message to n8n:', err);
   }
 });
 
